@@ -21,7 +21,7 @@ public class HeroController {
 
 	private List<Hero> heros = new ArrayList<>();	
 	
-	//private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	HeroController() {
 		buildHeros();
@@ -29,11 +29,13 @@ public class HeroController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Hero> getHeros() {
+		logger.debug("목록조회");
 		return this.heros;
 	}
 	//heroes/11
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Hero getHero(@PathVariable("id") Long id) {
+		logger.debug("상세조회 " + id);
 		return this.heros.stream()
 				.filter(hero -> hero.getId() == id)
 				.findFirst()
